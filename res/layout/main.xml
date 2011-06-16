@@ -6,13 +6,6 @@
     android:layout_width="match_parent" 
     android:orientation="vertical" 
     android:layout_gravity="center">
-  	<com.google.ads.AdView 
-	android:id="@+id/adView"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	ads:adUnitId="MY_AD_UNIT_ID"
-	ads:adSize="BANNER"
-	ads:loadAdOnCreate="true"/>
     <TextView 
     android:id="@+id/myLocationText" 
     android:layout_height="wrap_content" 

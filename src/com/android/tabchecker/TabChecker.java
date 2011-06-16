@@ -16,7 +16,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.google.ads.*;
 
 public class TabChecker extends Activity {
 
@@ -47,11 +46,6 @@ public class TabChecker extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
-	    // TODO make sure this works
-		// Look up the AdView as a resource and load a request.
-	    AdView adView = (AdView)this.findViewById(R.id.adView);
-	    adView.loadAd(new AdRequest());
 
 		// set up Button saveLocationoButton which will save the location
 		final Button saveButton = (Button) findViewById(R.id.saveLocationButton);
