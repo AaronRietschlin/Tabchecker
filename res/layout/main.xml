@@ -1,26 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout 
 	xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+    android:layout_height="match_parent" 
+    android:layout_width="match_parent" 
+    android:orientation="vertical" 
+    android:layout_gravity="center">
+  	<com.google.ads.AdView 
+	android:id="@+id/adView"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	ads:adUnitId="MY_AD_UNIT_ID"
+	ads:adSize="BANNER"
+	ads:loadAdOnCreate="true"/>
     <TextView 
-    android:layout_width="wrap_content" 
     android:id="@+id/myLocationText" 
     android:layout_height="wrap_content" 
-    android:text="@string/myLocationText"
-    ></TextView>
+    android:text="@string/myLocationText" 
+    android:layout_gravity="center" 
+    android:layout_width="wrap_content">
+    </TextView>
     <Button 
-    android:layout_width="wrap_content" 
     android:id="@+id/saveLocationButton" 
-    android:layout_height="wrap_content" 
     android:text="@string/savedLocationButton"
-    ></Button>
+    android:layout_gravity="center" 
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content">
+    </Button>
     <TextView 
-    android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" 
     android:id="@+id/savedLocationText" 
-    android:text="@string/savedLocationText"
-    ></TextView>
+    android:text="@string/savedLocationText" 
+    android:layout_gravity="center" 
+    android:layout_height="wrap_content" 
+    android:layout_width="wrap_content">
+    </TextView>
+    <Button 
+    android:layout_gravity="center" 
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:id="@+id/cancelAlertButton" 
+    android:text="@string/cancelAlertButton">
+    </Button>   
 </LinearLayout>

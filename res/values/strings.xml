@@ -6,4 +6,5 @@
     <string name="savedLocationButton">Save Bar Location</string>
     <string name="alertActivatedText">Alert Not Activated</string>
     <string name="tickerNotificationText">Reminder: Closer your tab!</string>
+    <string name="cancelAlertButton">Cancel Alert</string>
 </resources>
