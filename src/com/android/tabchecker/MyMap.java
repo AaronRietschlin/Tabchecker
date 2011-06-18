@@ -1,26 +1,78 @@
 package com.android.tabchecker;
 
-import android.os.Bundle;
+import java.util.List;
 
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
+import com.google.android.maps.Overlay;
+import com.google.android.maps.OverlayItem;
 
 public class MyMap extends MapActivity {
-	private MapView mapView;
 	
 	private MapController mapController;
+	List<Overlay> mapOverlays;
+	MyItemizedOverlay itemizedOverlay;
+	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.map_layout);
-		mapView = (MapView)findViewById(R.id.map_view);
+		// set to map.xml
+		setContentView(R.layout.map);
+		
+		MapView mapView = (MapView) findViewById(R.id.myMapView);
+		// mapview view shit
+		mapView.setBuiltInZoomControls(true);
+		
+		// Get the Map View's controller
+		mapController = mapView.getController();
+		// Zoom in 
+		mapController.setZoom(17);
+		
+		// set points
+		// set saved point on the map
+		Double geoSavedLat = TabChecker.latSaved*1E6;
+		Double geoSavedLng = TabChecker.lngSaved*1E6;
+		
+		// This sets the an overlay item on the map (the map marker)
+		
+		mapOverlays = mapView.getOverlays();
+		Drawable drawablesaved = this.getResources().getDrawable(
+				R.drawable.markersaved);
+		
+		itemizedOverlay = new MyItemizedOverlay(drawablesaved);
+		GeoPoint savedPoint = new GeoPoint(geoSavedLat.intValue(),
+				geoSavedLng.intValue());
+		OverlayItem overlayItemSaved = new OverlayItem(savedPoint, "", "");
+		itemizedOverlay.addOverlay(overlayItemSaved);
+		mapOverlays.add(itemizedOverlay);
+		
+		// set users current location on map
+		Double geoLat = TabChecker.lat*1E6;
+		Double geoLng = TabChecker.lng*1E6;
+		mapOverlays = mapView.getOverlays();
+		Drawable drawablecurrent = this.getResources().getDrawable(
+				R.drawable.markercurrent);
+		
+		itemizedOverlay = new MyItemizedOverlay(drawablecurrent);
+		GeoPoint currentPoint = new GeoPoint(geoLat.intValue(),
+				geoLng.intValue());
+		OverlayItem overlayItemCurrent = new OverlayItem(currentPoint, "", "");
+		itemizedOverlay.addOverlay(overlayItemCurrent);
+		mapOverlays.add(itemizedOverlay);
+
+		
+		// shit to center and move the map
+		mapController.setCenter(savedPoint);
+
 	}
 	
 	@Override
 	protected boolean isRouteDisplayed() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 }

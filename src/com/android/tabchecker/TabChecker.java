@@ -19,8 +19,8 @@ import android.widget.Toast;
 
 public class TabChecker extends Activity {
 
-	private double lat;
-	private double lng;
+	public static double lat;
+	public static double lng;
 	public static double latSaved;
 	public static double lngSaved;
 	
@@ -49,8 +49,10 @@ public class TabChecker extends Activity {
 
 		// set up Button saveLocationoButton which will save the location
 		final Button saveButton = (Button) findViewById(R.id.saveLocationButton);
+		
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			
+			@Override
 			public void onClick(View v) {
 				// setting up location services
 				LocationManager locationManager;
@@ -83,10 +85,10 @@ public class TabChecker extends Activity {
 				// This is the code to make MyAlarmService work, it will wake up the phone from sleeping
 				AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 				
-				Intent myIntent = new Intent(TabChecker.this,
+				Intent serviceIntent = new Intent(TabChecker.this,
 						MyAlarmService.class);
 				servicePendingIntent = PendingIntent.getService(
-						TabChecker.this, 0, myIntent, 0);
+						TabChecker.this, 0, serviceIntent, 0);
 
 				Calendar calendar = Calendar.getInstance();
 				calendar.setTimeInMillis(System.currentTimeMillis());
@@ -106,10 +108,12 @@ public class TabChecker extends Activity {
 		
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			
+			@Override
 			public void onClick(View v) {
 				// This is the code to cancel MyAlarmService  alarm once set off
 				AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 				alarmManager.cancel(servicePendingIntent);
+				finish();
 
 				// Tell the user about what we did.
 				Toast.makeText(TabChecker.this, "You have canceled the TabChecker Alarm!",
@@ -117,11 +121,28 @@ public class TabChecker extends Activity {
 			}
 		});
 		
+		// setup button to display the map showing saved location and current location
+		// TODO make the map take up the buttom of the screen? and remove lat and long fields
+		final Button mapButton = (Button) findViewById(R.id.mapButton);
+		
+		mapButton.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// launch the map actitiy
+				Intent mapIntent = new Intent(TabChecker.this, MyMap.class);
+				startActivity(mapIntent);
+				
+				// Tell the user what was done
+				Toast.makeText(TabChecker.this, "You have launched the map", Toast.LENGTH_LONG).show();
+			}	
+		});
+		
 		setUpGPS();	
 	}
 
 	// sets up actions updating the location depending on phone status
-	private void setUpGPS() {
+	public void setUpGPS() {
 		// setting up location services
 		LocationManager locationManager;
 		String context = Context.LOCATION_SERVICE;
@@ -189,11 +210,11 @@ public class TabChecker extends Activity {
 	
 	@Override
     protected void onResume() {
-        super.onResume();
+		super.onResume();
     }
     
 	@Override
 	protected void onStop() {
-        super.onStop();
+		super.onStop();
     }
 }

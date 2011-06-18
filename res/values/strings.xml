@@ -7,4 +7,6 @@
     <string name="alertActivatedText">Alert Not Activated</string>
     <string name="tickerNotificationText">Reminder: Closer your tab!</string>
     <string name="cancelAlertButton">Cancel Alert</string>
+    <string name="myLocationTextMap">myLocationTextMap</string>
+    <string name="mapButton">Map</string>
 </resources>

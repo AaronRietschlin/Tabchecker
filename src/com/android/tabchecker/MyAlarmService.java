@@ -13,7 +13,6 @@ import android.location.LocationManager;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.IBinder;
-import android.os.SystemClock;
 import android.widget.Toast;
 
 public class MyAlarmService extends Service {
@@ -137,14 +136,6 @@ public class MyAlarmService extends Service {
 		
 		int notificationRef = 1;
 		notificationManager.notify(notificationRef, notification);
-		
-		// repeating alarm
-/*		int updateFreq = 1;
-		int alarmType = AlarmManager.ELAPSED_REALTIME_WAKEUP;
-		long timeToRefresh = SystemClock.elapsedRealtime() + 
-	                           updateFreq*10*1000;
-	      
-	    alarms.setRepeating(alarmType, timeToRefresh, 
-	                          updateFreq*10*1000, alarmIntent); */ 
 	}
+
 }
