@@ -6,13 +6,6 @@
     android:layout_width="fill_parent" 
     android:orientation="vertical" 
     android:layout_gravity="top">
-    <TextView 
-    android:id="@+id/myLocationText" 
-    android:layout_height="wrap_content" 
-    android:text="@string/myLocationText" 
-    android:layout_gravity="center" 
-    android:layout_width="fill_parent">
-    </TextView>
     <Button 
     android:id="@+id/saveLocationButton" 
     android:text="@string/savedLocationButton"
@@ -20,13 +13,6 @@
     android:layout_height="wrap_content" 
     android:layout_width="fill_parent">
     </Button>
-    <TextView 
-    android:id="@+id/savedLocationText" 
-    android:text="@string/savedLocationText" 
-    android:layout_gravity="center" 
-    android:layout_height="wrap_content" 
-    android:layout_width="fill_parent">
-    </TextView>
     <Button 
     android:layout_gravity="center" 
     android:layout_height="wrap_content" 

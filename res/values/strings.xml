@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">TabChecker</string>
-    <string name="myLocationText">myLocationText</string>
-    <string name="savedLocationText">No Saved Bar</string>
     <string name="savedLocationButton">Save Bar Location</string>
     <string name="alertActivatedText">Alert Not Activated</string>
     <string name="tickerNotificationText">Reminder: Closer your tab!</string>
