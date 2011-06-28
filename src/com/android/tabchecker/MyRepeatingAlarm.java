@@ -18,7 +18,7 @@ public class MyRepeatingAlarm extends Service {
 	
 	@Override
 	public void onCreate() {
-		Toast.makeText(this, "MyRepeatingService.onCreate()", Toast.LENGTH_LONG).show();
+		//Toast.makeText(this, "MyRepeatingService.onCreate()", Toast.LENGTH_LONG).show();
 		
 		// Gets a reference to the notification manager
 		notificationManager = (NotificationManager) getSystemService(repeatingALarmService);
@@ -59,7 +59,7 @@ public class MyRepeatingAlarm extends Service {
 	
 	@Override
 	public IBinder onBind(Intent intent) {
-		Toast.makeText(this, "MyRepeatingService.onBind()", Toast.LENGTH_LONG).show();
+		//Toast.makeText(this, "MyRepeatingService.onBind()", Toast.LENGTH_LONG).show();
 		return null;
 	}
 	
@@ -67,17 +67,22 @@ public class MyRepeatingAlarm extends Service {
 	public void onDestroy() {
 		super.onDestroy();
 		Toast.makeText(this, "MyRepeatingService.onDestroy()", Toast.LENGTH_LONG).show();
+		
+		// stop the myrepeatingalarm service
+		Intent myServiceIntent = new Intent(this,
+				MyRepeatingAlarm.class);
+		stopService(myServiceIntent);
 	}
 	
 	@Override
 	public void onStart(Intent intent, int startId) {
 		super.onStart(intent, startId);
-		Toast.makeText(this, "MyRepeatingService.onStart()", Toast.LENGTH_LONG).show();
+		//Toast.makeText(this, "MyRepeatingService.onStart()", Toast.LENGTH_LONG).show();
 	}
 	
 	@Override
 	public boolean onUnbind(Intent intent) {
-		Toast.makeText(this, "MyRepeatingService.onUnbind()", Toast.LENGTH_LONG).show();
+		//Toast.makeText(this, "MyRepeatingService.onUnbind()", Toast.LENGTH_LONG).show();
 		return super.onUnbind(intent);
 	}
 }

@@ -1,10 +1,8 @@
 package com.android.tabchecker;
 
-import java.util.Calendar;
-
 import android.app.Activity;
-import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -41,7 +39,7 @@ public class TabChecker extends Activity {
 			@Override
 			public void onClick(View v) {
 				// Cancel the service
-				stopService();
+				stopServices();
 			}
 		});
 
@@ -64,25 +62,28 @@ public class TabChecker extends Activity {
 	}
 
 	public void startService() {
-		AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-
-		Intent serviceIntent = new Intent(TabChecker.this, MyAlarmService.class);
-		servicePendingIntent = PendingIntent.getService(TabChecker.this, 0,
-				serviceIntent, 0);
-
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTimeInMillis(System.currentTimeMillis());
-		calendar.add(Calendar.SECOND, 1);
-
-		alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-				servicePendingIntent);
+		// starts the service
+		Intent myServiceIntent = new Intent(TabChecker.this, MyAlarmService.class);
+		startService(myServiceIntent);
 	}
 
-	public void stopService() {
-		Intent myStopServiceIntent = new Intent(TabChecker.this,
-				MyAlarmService.class);
-		stopService(myStopServiceIntent);
+	public void stopServices() {
+//		myServiceIntent = new Intent(TabChecker.this,
+//				MyAlarmService.class);
+//		stopService(myServiceIntent);
+
+		// stops MyAlarmService using services name you need to start 
+		// a service and when you cancel you cancel them all
+		ComponentName serviceMyAlarm = startService(new Intent(this, MyAlarmService.class));
+		stopService(new Intent(this, serviceMyAlarm.getClass()));
+		try {
+			Class serviceClass = Class.forName(serviceMyAlarm.getClassName());
+			stopService(new Intent(this, serviceClass));
+		} catch (ClassNotFoundException e) {}
+		
+		stopService(new Intent(this, MyRepeatingAlarm.class));
 	}
+	
 
 	public void startMap() {
 		Intent mapIntent = new Intent(TabChecker.this, MyMap.class);
