@@ -34,8 +34,8 @@ public class MyMap extends MapActivity {
 
 		// set points
 		// set saved point on the map
-		Double geoSavedLat = MyAlarmService.latSaved * 1E6;
-		Double geoSavedLng = MyAlarmService.lngSaved * 1E6;
+		Double geoSavedLat = MyService.latSaved * 1E6;
+		Double geoSavedLng = MyService.lngSaved * 1E6;
 
 		// This sets the an overlay item on the map (the map marker)
 
@@ -52,8 +52,8 @@ public class MyMap extends MapActivity {
 		mapOverlays.add(itemizedOverlay);
 
 		// set users current location on map
-		Double geoLat = MyAlarmService.lat * 1E6;
-		Double geoLng = MyAlarmService.lng * 1E6;
+		Double geoLat = MyService.lat * 1E6;
+		Double geoLng = MyService.lng * 1E6;
 		mapOverlays = mapView.getOverlays();
 		Drawable drawablecurrent = this.getResources().getDrawable(
 				R.drawable.markercurrent);

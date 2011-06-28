@@ -15,6 +15,7 @@ public class MyRepeatingAlarm extends Service {
 	
 	NotificationManager notificationManager;
 	String repeatingALarmService = Context.NOTIFICATION_SERVICE;
+	public static final int NOTIFICATION_ID = 1;
 	
 	@Override
 	public void onCreate() {
@@ -53,8 +54,9 @@ public class MyRepeatingAlarm extends Service {
 				.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 		notification.sound = ringURI;
 
-		int notificationRef = 1;
-		notificationManager.notify(notificationRef, notification);
+		//int notificationRef = 1;
+		notificationManager.notify(NOTIFICATION_ID, notification);
+
 	}
 	
 	@Override
@@ -72,6 +74,8 @@ public class MyRepeatingAlarm extends Service {
 		Intent myServiceIntent = new Intent(this,
 				MyRepeatingAlarm.class);
 		stopService(myServiceIntent);
+		
+		
 	}
 	
 	@Override

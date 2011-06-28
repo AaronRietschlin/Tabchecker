@@ -20,8 +20,7 @@
             </intent-filter>
 		</activity>
         <service 
-        android:enabled='true' 
-        android:name=".MyAlarmService">
+        android:enabled='true' android:name=".MyService">
         </service>
         <activity 
         android:name=".MyMap" 
@@ -32,6 +31,6 @@
         <service android:name=".MyRepeatingAlarm" android:enabled="true"></service>
 	</application>
 	 <uses-sdk 
-	 android:minSdkVersion="4"
+	 android:minSdkVersion="7"
      android:targetSdkVersion="11" />
 </manifest>

@@ -1,8 +1,10 @@
 package com.android.tabchecker;
 
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,12 +14,18 @@ import android.widget.Toast;
 public class TabChecker extends Activity {
 
 	PendingIntent servicePendingIntent;
+	NotificationManager notificationManager;
+	public static boolean removeAllShit;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
+		
+		// cancel notifcations
+		String repeatingALarmService = Context.NOTIFICATION_SERVICE;
+		notificationManager = (NotificationManager)getSystemService(repeatingALarmService);
+		
 		// set up Button saveLocationoButton which will save the location
 		final Button saveButton = (Button) findViewById(R.id.saveLocationButton);
 
@@ -63,8 +71,10 @@ public class TabChecker extends Activity {
 
 	public void startService() {
 		// starts the service
-		Intent myServiceIntent = new Intent(TabChecker.this, MyAlarmService.class);
+		Intent myServiceIntent = new Intent(TabChecker.this, MyService.class);
 		startService(myServiceIntent);
+		
+		boolean removeAllShit = false;
 	}
 
 	public void stopServices() {
@@ -74,7 +84,7 @@ public class TabChecker extends Activity {
 
 		// stops MyAlarmService using services name you need to start 
 		// a service and when you cancel you cancel them all
-		ComponentName serviceMyAlarm = startService(new Intent(this, MyAlarmService.class));
+		ComponentName serviceMyAlarm = startService(new Intent(this, MyService.class));
 		stopService(new Intent(this, serviceMyAlarm.getClass()));
 		try {
 			Class serviceClass = Class.forName(serviceMyAlarm.getClassName());
@@ -82,6 +92,8 @@ public class TabChecker extends Activity {
 		} catch (ClassNotFoundException e) {}
 		
 		stopService(new Intent(this, MyRepeatingAlarm.class));
+		
+		boolean removeAllShit = true; 
 	}
 	
 
@@ -103,6 +115,7 @@ public class TabChecker extends Activity {
 
 	@Override
 	protected void onResume() {
+		notificationManager.cancel(MyRepeatingAlarm.NOTIFICATION_ID);
 		super.onResume();
 	}
 
